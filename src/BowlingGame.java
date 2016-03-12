@@ -12,12 +12,12 @@ public class BowlingGame {
     public int score() {
         currentRoll = 0;
         for(int frame = 0; frame < 10; frame++) {
-            if (rolls[currentRoll] == 10) {
-                total += 10 + rolls[currentRoll + 1] + rolls[currentRoll + 2];
+            if (isStrike()) {
+                total += 10 + strikeBonus();
                 currentRoll++;
             }
-            else if (rolls[currentRoll] + rolls[currentRoll + 1] == 10) {
-                total += 10 + rolls[currentRoll + 2];
+            else if (isSpare()) {
+                total += 10 + spareBonus();
                 currentRoll += 2;
             } else {
                 total += rolls[currentRoll] + rolls[currentRoll + 1];
@@ -25,6 +25,22 @@ public class BowlingGame {
             }
         }
         return total;
+    }
+
+    private int spareBonus() {
+        return rolls[currentRoll + 2];
+    }
+
+    private int strikeBonus() {
+        return rolls[currentRoll + 1] + rolls[currentRoll + 2];
+    }
+
+    private boolean isSpare() {
+        return rolls[currentRoll] + rolls[currentRoll + 1] == 10;
+    }
+
+    private boolean isStrike() {
+        return rolls[currentRoll] == 10;
     }
 
 }
