@@ -13,6 +13,15 @@ public class BowlingGameTest {
         }
     }
 
+    private void rollSpare() {
+        game.roll(5);
+        game.roll(5);
+    }
+
+    private void rollStrike() {
+        game.roll(10);
+    }
+
     @Before
     public void setUp() {
         game = new BowlingGame();
@@ -32,8 +41,7 @@ public class BowlingGameTest {
 
     @Test
     public void testOneSpare() {
-        game.roll(5);
-        game.roll(5);
+        rollSpare();
         game.roll(3);
         rollMany(0, 17);
         assertEquals(16, game.score());
@@ -41,10 +49,16 @@ public class BowlingGameTest {
 
     @Test
     public void testOneStrike() {
-        game.roll(10);
+        rollStrike();
         game.roll(4);
         game.roll(3);
         rollMany(0, 16);
         assertEquals(24, game.score());
+    }
+
+    @Test
+    public void testPerfectGame() {
+        rollMany(10, 12);
+        assertEquals(300, game.score());
     }
 }
