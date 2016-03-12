@@ -11,7 +11,6 @@ public class BowlingGame {
     }
 
     public int score() {
-//        InterpretFrame frame = new InterpretFrame();
         for(int frame = 0; frame < 10; frame++) {
             scoreFrame();
         }
@@ -19,11 +18,12 @@ public class BowlingGame {
     }
 
     private void scoreFrame() {
-        if (isStrike()) {
+        InterpretFrame frame = new InterpretFrame(rolls, frameIndex);
+        if (frame.isStrike()) {
             total += 10 + strikeBonus();
             frameIndex++;
         }
-        else if (isSpare()) {
+        else if (frame.isSpare()) {
             total += 10 + spareBonus();
             frameIndex += 2;
         } else {
@@ -44,12 +44,6 @@ public class BowlingGame {
         return rolls[frameIndex + 1] + rolls[frameIndex + 2];
     }
 
-    private boolean isSpare() {
-        return rolls[frameIndex] + rolls[frameIndex + 1] == 10;
-    }
 
-    private boolean isStrike() {
-        return rolls[frameIndex] == 10;
-    }
 
 }
