@@ -10,6 +10,7 @@ public class BowlingGame {
     }
 
     public int score() {
+        currentRoll = 0;
         for(int frame = 0; frame < 10; frame++) {
             if (rolls[currentRoll] + rolls[currentRoll + 1] == 10) {
                 total += 10 + rolls[currentRoll + 2];
