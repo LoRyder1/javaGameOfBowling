@@ -20,11 +20,15 @@ public class BowlingGame {
                 total += 10 + spareBonus();
                 currentRoll += 2;
             } else {
-                total += rolls[currentRoll] + rolls[currentRoll + 1];
+                total += sumAllPinsInFrame();
                 currentRoll += 2;
             }
         }
         return total;
+    }
+
+    private int sumAllPinsInFrame() {
+        return rolls[currentRoll] + rolls[currentRoll + 1];
     }
 
     private int spareBonus() {
