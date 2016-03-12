@@ -38,4 +38,13 @@ public class BowlingGameTest {
         rollMany(0, 17);
         assertEquals(16, game.score());
     }
+
+    @Test
+    public void testOneStrike() {
+        game.roll(10);
+        game.roll(4);
+        game.roll(3);
+        rollMany(0, 16);
+        assertEquals(24, game.score());
+    }
 }
