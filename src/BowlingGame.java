@@ -5,6 +5,7 @@ public class BowlingGame {
     private int rolls[] = new int[21];
     private int currentRoll = 0;
     private int frameIndex = 0;
+    private InterpretFrame frame;
 
     public void roll(int pins) {
         rolls[currentRoll++] += pins;
@@ -18,17 +19,29 @@ public class BowlingGame {
     }
 
     private void scoreFrame() {
-        InterpretFrame frame = new InterpretFrame(rolls, frameIndex);
+        frame = new InterpretFrame(rolls, frameIndex);
         if (frame.isStrike()) {
-            total += 10 + frame.strikeBonus();
-            frameIndex++;
+            addStrikeToTotal();
         }
         else if (frame.isSpare()) {
-            total += 10 + frame.spareBonus();
-            frameIndex += 2;
+            addSpareToTotal();
         } else {
-            total += frame.sumAllPinsInFrame();
-            frameIndex += 2;
+            addFrameToTotal();
         }
+    }
+
+    private void addFrameToTotal() {
+        total += frame.sumAllPinsInFrame();
+        frameIndex += 2;
+    }
+
+    private void addSpareToTotal() {
+        total += 10 + frame.spareBonus();
+        frameIndex += 2;
+    }
+
+    private void addStrikeToTotal() {
+        total += 10 + frame.strikeBonus();
+        frameIndex++;
     }
 }
