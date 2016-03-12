@@ -15,4 +15,17 @@ public class InterpretFrame {
     public boolean isStrike() {
         return rolls[frameIndex] == 10;
     }
+
+    public int sumAllPinsInFrame() {
+        return rolls[frameIndex] + rolls[frameIndex + 1];
+    }
+
+    public int spareBonus() {
+        return rolls[frameIndex + 2];
+    }
+
+    public int strikeBonus() {
+        return rolls[frameIndex + 1] + rolls[frameIndex + 2];
+    }
+
 }
